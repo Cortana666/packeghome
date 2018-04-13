@@ -10,6 +10,6 @@
   // var_dump($sql);die;
   $res = $pdo -> exec($sql);
   if ($res) {
-    echo "<script>alert('修改成功!');location='../design.php'</script>";
+    echo "<script>alert('修改成功!');location='../table.php'</script>";
   }
  ?>

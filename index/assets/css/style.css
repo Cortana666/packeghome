@@ -158,10 +158,8 @@ ul.navbar-nav {
 .form-top-right {
 	float: left;
 	width: 25%;
-	padding-top: 5px;
-	font-size: 66px;
-	color: #ddd;
-	line-height: 100px;
+	padding-top: 18px;
+	/*line-height: 65px;*/
 	text-align: right;
 }
 
@@ -227,4 +225,13 @@ only screen and (                min-resolution: 2dppx) {
 	border:0;
 	position: relative;
 	padding-left: 7px;
+}
+.user-img {
+	display: inline-block;
+	width:40px;
+	height: 40px;
+	border-radius: 35px;
+}
+.info p {
+	font-weight: bold;
 }

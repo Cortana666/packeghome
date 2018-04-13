@@ -1,4 +1,11 @@
 <?php
+    session_start();
+    if(isset($_SESSION["username"])){
+    }else{
+        echo "<script>alert('请登录！');location.href='login.php';</script>";
+    }
+?>
+<?php
   $pdo = new PDO("mysql:local=localhost;dbname=db_ph","root","root");
   $pdo -> query("set names utf8;");
   $id = $_GET['id'];
@@ -12,29 +19,28 @@
  <head>
      <meta charset="UTF-8">
      <title>后台管理</title>
-     <link rel="stylesheet" type="text/css" href="../css/common.css"/>
-     <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+     <link rel="stylesheet" type="text/css" href="css/common.css"/>
+     <link rel="stylesheet" type="text/css" href="css/main.css"/>
      <script type="text/javascript" src="../js/libs/modernizr.min.js"></script>
  </head>
  <body>
- <div class="topbar-wrap white">
-     <div class="topbar-inner clearfix">
-         <div class="topbar-logo-wrap clearfix">
-             <h1 class="topbar-logo none"><a href="index.php" class="navbar-brand">后台管理</a></h1>
-             <ul class="navbar-list clearfix">
-                 <li><a class="on" href="index.php">首页</a></li>
-                 <li><a href="#" target="_blank">网站首页</a></li>
-             </ul>
-         </div>
-         <div class="top-info-wrap">
-             <ul class="top-info-list clearfix">
-                 <li><a href="#">管理员</a></li>
-                 <li><a href="register.php">注册</a></li>
-                 <li><a href="login.php">退出</a></li>
-             </ul>
-         </div>
-     </div>
- </div>
+   <div class="topbar-wrap white">
+       <div class="topbar-inner clearfix">
+           <div class="topbar-logo-wrap clearfix">
+               <h1 class="topbar-logo none"><a href="index.php" class="navbar-brand">后台管理</a></h1>
+               <ul class="navbar-list clearfix">
+                   <li><a class="on" href="index.php">首页</a></li>
+               </ul>
+           </div>
+           <div class="top-info-wrap">
+               <ul class="top-info-list clearfix">
+                   <li><a href="#"><?php echo $_SESSION['username']; ?></a></li>
+                   <li><a href="resetpassword.php?id=<?php echo $_SESSION['id']; ?>">修改密码</a></li>
+                   <li><a href="logout.php">退出</a></li>
+               </ul>
+           </div>
+       </div>
+   </div>
  <div class="container clearfix">
      <div class="sidebar-wrap">
          <div class="sidebar-title">
@@ -45,13 +51,11 @@
                  <li>
                      <a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
                      <ul class="sub-menu">
-                         <li><a href="design.php"><i class="icon-font">&#xe008;</i>作品管理</a></li>
-                         <li><a href="design.php"><i class="icon-font">&#xe005;</i>博文管理</a></li>
-                         <li><a href="design.php"><i class="icon-font">&#xe006;</i>分类管理</a></li>
-                         <li><a href="design.php"><i class="icon-font">&#xe004;</i>留言管理</a></li>
-                         <li><a href="design.php"><i class="icon-font">&#xe012;</i>评论管理</a></li>
-                         <li><a href="design.php"><i class="icon-font">&#xe052;</i>友情链接</a></li>
-                         <li><a href="design.php"><i class="icon-font">&#xe033;</i>广告管理</a></li>
+                         <li><a href="table.php"><i class="icon-font">&#xe008;</i>订单管理</a></li>
+                         <li><a href="sender.php"><i class="icon-font">&#xe005;</i>配送人员管理</a></li>
+                         <li><a href="user.php"><i class="icon-font">&#xe006;</i>用户管理</a></li>
+                         <li><a href="admin.php"><i class="icon-font">&#xe004;</i>管理员管理</a></li>
+                         <li><a href="advertisement.php"><i class="icon-font">&#xe033;</i>广告管理</a></li>
                      </ul>
                  </li>
                  <li>
@@ -74,7 +78,7 @@
          </div>
          <div class="result-wrap">
              <div class="result-content">
-                 <form action="art_alt_other.php" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                 <form action="conn_admin/DoTableAlt.php" method="post" id="myform" name="myform" enctype="multipart/form-data">
                    <input type="hidden" name="hidden" value="<?php echo $row['id']; ?>">
                      <table class="insert-tab" width="100%">
                          <tbody>
@@ -83,7 +87,7 @@
                                  <td>
                                      <select class="" name="status">
                                        <option value="">请选择</option>
-                                       <option <?php if($row['status'] == 0){echo "selected='selected'";var_dump($row['status']);} ?> value="0">处理中</option>
+                                       <option <?php if($row['status'] == 0){echo "selected='selected'";} ?> value="0">处理中</option>
                                        <option <?php if($row['status'] == 1){echo "selected='selected'";} ?> value="1">已完成</option>
                                      </select>
                                  </td>

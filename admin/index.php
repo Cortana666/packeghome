@@ -1,10 +1,9 @@
 <?php
-    // session_start();
-    // if(isset($_SESSION["admin"])){
-    //     echo "<script>alert('登陆成功！');location.href='index.php';</script>";
-    // }else{
-    //     echo "<script>location.href='login.php';</script>";
-    // }
+    session_start();
+    if(isset($_SESSION["username"])){
+    }else{
+        echo "<script>alert('请登录！');location.href='login.php';</script>";
+    }
 ?>
 <!doctype html>
 <html>
@@ -22,13 +21,12 @@
             <h1 class="topbar-logo none"><a href="index.php" class="navbar-brand">后台管理</a></h1>
             <ul class="navbar-list clearfix">
                 <li><a class="on" href="index.php">首页</a></li>
-                <li><a href="#">网站首页</a></li>
             </ul>
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><a href="#">管理员</a></li>
-                <li><a href="resetpassword.php">修改密码</a></li>
+                <li><a href="#"><?php echo $_SESSION['username']; ?></a></li>
+                <li><a href="resetpassword.php?id=<?php echo $_SESSION['id']; ?>">修改密码</a></li>
                 <li><a href="logout.php">退出</a></li>
             </ul>
         </div>
@@ -74,9 +72,9 @@
             </div>
             <div class="result-content">
                 <div class="short-wrap">
-                      <a href="insert.php"><i class="icon-font">&#xe001;</i>新增管理员</a>
-                      <a href="insert.php"><i class="icon-font">&#xe005;</i>新增配送人员</a>
-                    <a href="#"><i class="icon-font">&#xe048;</i>新增广告</a>
+                      <a href="adminadd.php"><i class="icon-font">&#xe001;</i>新增管理员</a>
+                      <a href="senderadd.php"><i class="icon-font">&#xe005;</i>新增配送人员</a>
+                    <a href="advertisementadd"><i class="icon-font">&#xe048;</i>新增广告</a>
                 </div>
             </div>
         </div>

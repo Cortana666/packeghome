@@ -1,4 +1,11 @@
 <?php
+    session_start();
+    if(isset($_SESSION["username"])){
+    }else{
+        echo "<script>alert('请登录！');location.href='login.php';</script>";
+    }
+?>
+<?php
   header("Content-type:text/html;charset=utf8;");
   $pdo = new PDO("mysql:local=localhost;dbname=db_ph","root","root");
   $pdo -> query("set names utf8;");
@@ -19,24 +26,23 @@
     <script type="text/javascript" src="js/libs/modernizr.min.js"></script>
 </head>
 <body>
-<div class="topbar-wrap white">
-    <div class="topbar-inner clearfix">
-        <div class="topbar-logo-wrap clearfix">
-            <h1 class="topbar-logo none"><a href="index.php" class="navbar-brand">后台管理</a></h1>
-            <ul class="navbar-list clearfix">
-                <li><a class="on" href="index.php">首页</a></li>
-                <li><a href="#" target="_blank">网站首页</a></li>
-            </ul>
-        </div>
-        <div class="top-info-wrap">
-            <ul class="top-info-list clearfix">
-                <li><a href="">管理员</a></li>
-                <li><a href="register.php">修改密码</a></li>
-                <li><a href="login.php">退出</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
+  <div class="topbar-wrap white">
+      <div class="topbar-inner clearfix">
+          <div class="topbar-logo-wrap clearfix">
+              <h1 class="topbar-logo none"><a href="index.php" class="navbar-brand">后台管理</a></h1>
+              <ul class="navbar-list clearfix">
+                  <li><a class="on" href="index.php">首页</a></li>
+              </ul>
+          </div>
+          <div class="top-info-wrap">
+              <ul class="top-info-list clearfix">
+                  <li><a href="#"><?php echo $_SESSION['username']; ?></a></li>
+                  <li><a href="resetpassword.php?id=<?php echo $_SESSION['id']; ?>">修改密码</a></li>
+                  <li><a href="logout.php">退出</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
 <div class="container clearfix">
     <div class="sidebar-wrap">
         <div class="sidebar-title">
@@ -47,11 +53,11 @@
                 <li>
                     <a href="#"><i class="icon-font">&#xe003;</i>常用操作</a>
                     <ul class="sub-menu">
-                        <li><a href="design.php"><i class="icon-font">&#xe008;</i>订单管理</a></li>
-                        <li><a href="design.php"><i class="icon-font">&#xe005;</i>配送人员管理</a></li>
-                        <li><a href="design.php"><i class="icon-font">&#xe006;</i>用户管理</a></li>
-                        <li><a href="design.php"><i class="icon-font">&#xe004;</i>管理员管理</a></li>
-                        <li><a href="design.php"><i class="icon-font">&#xe033;</i>广告管理</a></li>
+                        <li><a href="table.php"><i class="icon-font">&#xe008;</i>订单管理</a></li>
+                        <li><a href="sender.php"><i class="icon-font">&#xe005;</i>配送人员管理</a></li>
+                        <li><a href="user.php"><i class="icon-font">&#xe006;</i>用户管理</a></li>
+                        <li><a href="admin.php"><i class="icon-font">&#xe004;</i>管理员管理</a></li>
+                        <li><a href="advertisement.php"><i class="icon-font">&#xe033;</i>广告管理</a></li>
                     </ul>
                 </li>
                 <li>
@@ -100,7 +106,7 @@
             </div>
         </div>
         <div class="result-wrap">
-            <form name="myform" id="myform" method="post" action="conn_admin/art_del_some.php">
+            <form name="myform" id="myform" method="post" action="conn_admin/DoTableDeleteSomes.php">
                 <div class="result-title">
                     <div class="result-list">
                         <a id="batchDel" onclick="document.getElementById('myform').submit();"><i class="icon-font" ></i>批量删除</a>
@@ -158,8 +164,8 @@
                                <td>".$show['time']."</td>
                                <td>".$show['number']."</td>
                                <td>
-                                   <a class=\"link-update\" href=\"conn_admin/art_alt.php?id=".$show_id."\">修改</a>
-                                   <a class=\"link-del\" href=\"conn_admin/art_del.php?del_id=".$show_id."\">删除</a>
+                                   <a class=\"link-update\" href=\"tablealt.php?id=".$show_id."\">修改</a>
+                                   <a class=\"link-del\" href=\"conn_admin/DoTableDelete.php?del_id=".$show_id."\">删除</a>
                                </td>
                            </tr>";
                           }
@@ -184,8 +190,8 @@
                                <td>".$show['time']."</td>
                                <td>".$show['number']."</td>
                                <td>
-                                   <a class=\"link-update\" href=\"conn_admin/art_alt.php?id=".$show_id."\">修改</a>
-                                   <a class=\"link-del\" href=\"conn_admin/art_del.php?del_id=".$show_id."\">删除</a>
+                               <a class=\"link-update\" href=\"tablealt.php?id=".$show_id."\">修改</a>
+                               <a class=\"link-del\" href=\"conn_admin/DoTableDelete.php?del_id=".$show_id."\">删除</a>
                                </td>
                            </tr>";
                           }

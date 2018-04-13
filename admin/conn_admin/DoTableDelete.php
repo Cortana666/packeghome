@@ -8,9 +8,9 @@
 	// $del->exec();
 	if($del){
 		echo "<script>alert('删除成功!')</script>";
-		echo "<script>window.location=('../design.php');</script>";
+		echo "<script>window.location=('../table.php');</script>";
 	}else{
 		echo "<script>alert('删除失败!')</script>";
-		echo "<script>window.location=('../design.php');</script>";
+		echo "<script>window.location=('../table.php');</script>";
 	}
  ?>
